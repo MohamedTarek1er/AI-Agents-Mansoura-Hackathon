@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agent.OS | Unified Control</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #070910; color: #f1f5f9; }
+        .mono { font-family: 'JetBrains Mono', monospace; }
+        
+        /* Unified Border Logic */
+        .grid-cell {
+            background-color: rgba(15, 23, 42, 0.4);
+            transition: background-color 0.2s ease;
+            border: 1px solid #1e293b;
+            transition: all 0.3s ease;
+            border-radius: 5px;
+        }
+        .grid-cell:hover {
+            background-color: rgba(58, 68, 85, 0.3);
+            border: 1px solid #545454;
+            box-shadow: 0 10px 30px -10px rgba(79, 70, 229, 0.3);
+        }
+
+
+        .tab-button {
+    background-color: #1e293b;
+    transition: all 0.3s ease;
+}
+
+/* This is the background that appears when clicked */
+.tab-button.active {
+    background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%) !important;
+    box-shadow: 0 0 15px rgba(99, 102, 241, 0.4);
+}
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 10px; }
+
+        #chat-interface {
+    scrollbar-width: none; /* إخفاء السكرول بار */
+    scroll-behavior: smooth;
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.hidden { display: none !important; }
+    </style>
+</head>
+<body class="h-screen flex overflow-hidden">
+
+    <aside class="w-20 lg:w-64 border-r border-slate-800 flex flex-col items-center lg:items-stretch bg-[#070910] z-20">
+        <div class="p-6 mb-4">
+            <div class="flex items-center gap-3">
+                <div style="margin-left: 40px;">
+                    <div><p><img src="./WhatsApp_Image_2026-01-27_at_9.04.00_PM-removebg-preview.png" alt="" width="120px"></p></div>
+                </div>
+                
+            </div>
+        </div>
+
+        <nav class="flex-1 px-3 space-y-1">
+            <a href="#" class="flex items-center justify-center lg:justify-start gap-3 p-3 rounded bg-slate-800 text-indigo-400">
+                <i data-lucide="layout-dashboard" class="w-5 h-5"></i>
+                <span class="text-sm font-medium lg:block">Agents</span>
+            </a>
+            
+        </nav>
+    </aside>
+
+    <main class="flex-1 flex flex-col relative overflow-y-auto">
+        
+        <header class="p-4 border-b border-slate-800 flex justify-between items-center bg-[#070910] sticky top-0 z-10">
+            <div class="flex items-center gap-4">
+                <h2 class="text-xs font-bold uppercase tracking-widest text-slate-500">Dashboard</h2>
+                <div class="flex items-center gap-2 px-2 py-1">
+             
+                   
+                </div>
+            </div>
+            
+        </header>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 p-6">
+            
+            <div class="grid-cell p-6 border-r border-b">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="font-semibold text-slate-200 text-sm flex items-center gap-2 uppercase tracking-tight">
+                        <span class="text-indigo-500 mono opacity-50 text-[10px]">01 //</span> Learner Intelligence
+                    </h3>
+             
+                </div>
+                <div class="bg-black/20 p-4 rounded border border-slate-800 flex items-center justify-between mb-8">
+                    <i data-lucide="brain-circuit" class="text-indigo-500 w-8 h-8"></i>
+                    <div class="text-right">
+                        <div class="text-xl font-bold">98.2<span class="text-[10px] text-slate-500 ml-0.5">%</span></div>
+                        <div class="text-[9px] text-indigo-400 uppercase font-bold tracking-widest">Match Score</div>
+                    </div>
+                </div>
+                <div class="space-y-4 pt-4 border-t border-slate-800/50">
+                    <div>
+                        <span class="text-[9px] uppercase tracking-widest text-slate-500 font-bold block mb-1">Incoming Signal</span>
+                        <div class="text-xs text-slate-400">PDF Portfolio parsed via Vector Engine.</div>
+                    </div>
+                    <div>
+                        <span class="text-[9px] uppercase tracking-widest text-indigo-500 font-bold block mb-1">Agent Consensus</span>
+                        <div class="text-xs text-slate-200 border-l-2 border-indigo-500/50 pl-3">"Deep expertise in RAG & Backend systems detected."</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid-cell p-6 border-r border-b xl:col-span-2">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="font-semibold text-slate-200 text-sm flex items-center gap-2 uppercase tracking-tight">
+                        <span class="text-emerald-500 mono opacity-50 text-[10px]">02 //</span> Market Intelligence
+                    </h3>
+            
+                </div>
+                <div class="h-16 flex items-end gap-1 px-2 mb-8">
+                    <div class="flex-1 bg-emerald-500/20 border-t border-emerald-500/50 h-1/2"></div>
+                    <div class="flex-1 bg-emerald-500/20 border-t border-emerald-500/50 h-3/4"></div>
+                    <div class="flex-1 bg-emerald-500/40 border-t border-emerald-500/60 h-full"></div>
+                    <div class="flex-1 bg-emerald-500/20 border-t border-emerald-500/50 h-2/3"></div>
+                </div>
+                <div class="space-y-4 pt-4 border-t border-slate-800/50">
+                    <div>
+                        <span class="text-[9px] uppercase tracking-widest text-slate-500 font-bold block mb-1">Incoming Signal</span>
+                        <div class="text-xs text-slate-400">Global Tech Job Index Sync.</div>
+                    </div>
+                    <div>
+                        <span class="text-[9px] uppercase tracking-widest text-emerald-500 font-bold block mb-1">Agent Consensus</span>
+                        <div class="text-xs text-slate-200 border-l-2 border-emerald-500/50 pl-3">"Demand for 'VectorDB Architects' up 210%."</div>
+                    </div>
+                </div>
+            </div>
+
+            
+
+            <div class="grid-cell p-6 border-r border-b xl:col-span-2">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="font-semibold text-slate-200 text-sm flex items-center gap-2 uppercase tracking-tight">
+                        <span class="text-purple-500 mono opacity-50 text-[10px]">03 //</span> Personalized Guidance
+                    </h3>
+                    <span class="text-[10px] text-slate-500 mono uppercase tracking-widest">Optimized Path</span>
+                </div>
+                <div class="flex items-center justify-between py-6 px-12 mb-4">
+                    <div class="flex flex-col items-center gap-2">
+                        <div class="w-6 h-6 rounded-full bg-emerald-500 flex items-center justify-center border-2 border-emerald-400">
+                            <i data-lucide="check" class="w-3.5 h-3.5 text-white"></i>
+                        </div>
+                        <span class="text-[9px] text-slate-500 uppercase font-bold">Core</span>
+                    </div>
+                    <div class="h-px bg-slate-800 flex-1 mx-4"></div>
+                    <div class="flex flex-col items-center gap-2">
+                        <div class="w-6 h-6 rounded-full bg-purple-600 border-2 border-purple-400 shadow-[0_0_10px_rgba(168,85,247,0.3)]"></div>
+                        <span class="text-[9px] text-purple-400 uppercase font-bold">Advanced</span>
+                    </div>
+                    <div class="h-px bg-slate-800 flex-1 mx-4"></div>
+                    <div class="flex flex-col items-center gap-2 opacity-30">
+                        <div class="w-6 h-6 rounded-full bg-slate-900 border border-slate-700"></div>
+                        <span class="text-[9px] text-slate-500 uppercase font-bold">Expert</span>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-8 border-t border-slate-800/50 pt-4">
+                    <div>
+                        <span class="text-[9px] uppercase tracking-widest text-slate-500 font-bold block mb-1">Incoming Signal</span>
+                        <div class="text-xs text-slate-400 italic">"Target: Lead AI Architect"</div>
+                    </div>
+                    <div>
+                        <span class="text-[9px] uppercase tracking-widest text-purple-500 font-bold block mb-1">Agent Consensus</span>
+                        <div class="text-xs text-slate-200 border-l-2 border-purple-500/50 pl-3">"Injecting AWS Bedrock path into Phase 2."</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid-cell p-6 border-b">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="font-semibold text-slate-200 text-sm flex items-center gap-2 uppercase tracking-tight">
+                        <span class="text-sky-500 mono opacity-50 text-[10px]">04 //</span> Learning Stream
+                    </h3>
+                    <div class="w-1.5 h-1.5 rounded-full bg-sky-500 animate-pulse"></div>
+                </div>
+                <div class="flex items-center gap-4 bg-sky-500/5 p-4 rounded border border-sky-500/10 mb-8">
+                    <i data-lucide="search" class="w-5 h-5 text-sky-400"></i>
+                    <span class="text-[10px] text-slate-400 uppercase tracking-widest">Scanning ArXiv / Github</span>
+                </div>
+                <div class="space-y-4 pt-4 border-t border-slate-800/50">
+                    <div>
+                        <span class="text-[9px] uppercase tracking-widest text-slate-500 font-bold block mb-1">Incoming Signal</span>
+                        <div class="text-xs text-slate-400 italic font-mono">202.44.11.9 (API)</div>
+                    </div>
+                    <div>
+                        <span class="text-[9px] uppercase tracking-widest text-sky-500 font-bold block mb-1">Agent Consensus</span>
+                        <div class="text-xs text-slate-200 border-l-2 border-sky-500/50 pl-3">"New paper detected: 'Efficient Transformer Scaling'."</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+       <div class="flex items-center gap-7" style="margin-left: 250px; margin-top: 10px;">
+    <button class="tab-button active px-6 py-3 rounded-xl text-white text-sm font-semibold hover:opacity-90 transition flex items-center gap-2"> 
+        Learner Intelligence
+    </button>
+    <button class="tab-button px-6 py-3 rounded-xl text-white text-sm font-semibold hover:opacity-90 transition flex items-center gap-2">
+        Market Intelligence
+    </button>
+    <button class="tab-button px-6 py-3 rounded-xl text-white text-sm font-semibold hover:opacity-90 transition flex items-center gap-2">
+        Personalized Guidance
+    </button>
+    <button class="tab-button px-6 py-3 rounded-xl text-white text-sm font-semibold hover:opacity-90 transition flex items-center gap-2">
+        Learning Stream
+    </button>
+</div>
+
+<div id="main-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6 p-6">
+    </div>
+
+<div id="chat-interface" class="hidden flex-1 flex flex-col p-6 overflow-y-auto space-y-6 max-w-4xl mx-auto w-full mb-24">
+    </div>
+
+<footer class="fixed bottom-0 left-64 right-0 p-6 bg-gradient-to-t from-slate-950 to-transparent">
+    <div class="max-w-4xl mx-auto flex items-center gap-3 bg-slate-800/80 backdrop-blur-xl border border-slate-700 p-2 rounded-2xl shadow-2xl">
+        <input type="text" id="command-input" placeholder="Ask the agents or set a new goal..." class="flex-1 bg-transparent border-none focus:ring-0 px-4 text-sm text-slate-200 outline-none">
+        
+        <button id="execute-btn" class="px-6 py-2 rounded-xl text-white text-sm font-semibold hover:opacity-90 transition flex items-center gap-2" 
+                style="background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);">
+            <i data-lucide="sparkles" class="w-4 h-4"></i> 
+            Generate
+        </button>
+    </div>
+</footer>
+    </main>
+
+    <script>
+    // 1. Initialize Icons
+    lucide.createIcons();
+
+    const input = document.getElementById('command-input');
+const executeBtn = document.getElementById('execute-btn');
+const gridContainer = document.querySelector('.grid'); // المربعات
+const chatInterface = document.getElementById('chat-interface');
+
+executeBtn.addEventListener('click', () => {
+    const userMessage = input.value.trim();
+    
+    if (userMessage !== "") {
+        // 1. إخفاء المربعات فوراً وإظهار واجهة الشات
+        gridContainer.classList.add('hidden');
+        chatInterface.classList.remove('hidden');
+
+        // 2. إضافة رسالة المستخدم
+        addMessage('user', userMessage);
+
+        // 3. مسح المدخلات وتحويل الزرار لحالة "تفكير"
+        input.value = "";
+        executeBtn.innerHTML = "Thinking...";
+        executeBtn.disabled = true;
+
+        fetch("http://127.0.0.1:8000/analyze", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                message: userMessage
+            })
+        })
+            .then(res => res.json())
+            .then(data => {
+                addMessage('ai', data.response);
+            })
+            .catch(err => {
+                addMessage('ai', "⚠️ Error connecting to agent backend.");
+            })
+            .finally(() => {
+                executeBtn.innerHTML = "Generate";
+                executeBtn.disabled = false;
+            });
+
+    }
+});
+
+// وظيفة إضافة الرسائل بشكل فقاعات (Bubbles)
+function addMessage(sender, text) {
+    const wrapper = document.createElement('div');
+    wrapper.className = sender === 'user' ? "flex justify-end" : "flex justify-start";
+
+    const msg = document.createElement('div');
+    msg.className = sender === 'user' 
+        ? "bg-indigo-600 text-white p-4 rounded-2xl rounded-tr-none max-w-md shadow-lg border border-indigo-400/30" 
+        : "bg-slate-800 text-slate-200 p-4 rounded-2xl rounded-tl-none max-w-md shadow-lg border border-slate-700";
+    
+    msg.innerHTML = `<p class="text-sm leading-relaxed">${text}</p>`;
+    
+    wrapper.appendChild(msg);
+    chatInterface.appendChild(wrapper);
+
+    // سكرول تلقائي لآخر رسالة
+    chatInterface.scrollTop = chatInterface.scrollHeight;
+}
+
+    // 3. Tab Button Logic
+    const navButtons = document.querySelectorAll('.tab-button');
+    navButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            navButtons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+        });
+    });
+</script>
+</body>
+</html>
